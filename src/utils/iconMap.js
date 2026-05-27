@@ -13,7 +13,6 @@ import {
 } from 'react-icons/fa'
 import {
   SiTailwindcss,
-  SiFramermotion,
   SiVite,
   SiExpress,
   SiPostgresql,
@@ -24,7 +23,6 @@ import {
   SiFirebase,
   SiTerraform,
   SiGraphql,
-  SiVisualstudiocode,
   SiPostman,
 } from 'react-icons/si'
 
@@ -36,7 +34,7 @@ const iconMap = {
   JavaScript: FaJs,
   React: FaReact,
   TailwindCSS: SiTailwindcss,
-  'Framer Motion': SiFramermotion,
+  'Framer Motion': FaReact,
   Vite: SiVite,
   'Node.js': FaNode,
   'Express.js': SiExpress,
@@ -50,13 +48,13 @@ const iconMap = {
   Redis: SiRedis,
   Supabase: SiSupabase,
   Firebase: SiFirebase,
-  AWS: SiSupabase, // Using Supabase as placeholder
+  AWS: FaAws,
   Docker: FaDocker,
   Terraform: SiTerraform,
   'GitHub Actions': FaGithub,
   Git: FaGit,
   GitHub: FaGithub,
-  'VS Code': SiVisualstudiocode,
+  'VS Code': FaCode,
   Postman: SiPostman,
 }
 

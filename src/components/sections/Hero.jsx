@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import useWebSocket from '../hooks/useWebSocket.jsx'
+import useWebSocket from '../../hooks/useWebSocket.jsx'
 
 const containerVariants = {
   hidden: {
@@ -99,16 +99,6 @@ function Hero() {
           >
             <span className="absolute inset-0 bg-gradient-to-r from-cyan-400 via-indigo-500 to-fuchsia-500 opacity-0 transition duration-500 group-hover:opacity-80" />
             <span className="relative z-10">LinkedIn</span>
-          </a>
-
-          <a
-            href="#contact"
-            className="group relative inline-flex w-full items-center justify-center overflow-hidden rounded-full border border-white/10 bg-slate-950/80 px-6 py-3 text-sm font-semibold text-white transition sm:w-auto"
-          >
-            <span className="absolute inset-0 bg-gradient-to-r from-cyan-400 via-indigo-500 to-fuchsia-500 opacity-0 transition duration-500 group-hover:opacity-80" />
-            <span className="relative z-10">Contact Me</span>
-          </a>
-        </motion.div>
           </a>
 
           <a
