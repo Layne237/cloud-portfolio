@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion'
+import { IMAGES } from '../../constants/imageUrls.js'
 
 // ProjectCard: presentational component that receives a `project` prop and
 // renders a glassmorphic card with hover interactions. We keep this focused
@@ -24,7 +25,8 @@ function ProjectCard({ project }) {
         {/* Front face */}
         <div style={{ backfaceVisibility: 'hidden' }} className="rounded-xl overflow-hidden">
           <div className="relative h-48 w-full overflow-hidden rounded-lg">
-            <img src={project.image} alt={project.title} className="h-full w-full object-cover" />
+            {/* Use S3 image URL from project data or fall back to the shared S3 constant map */}
+            <img src={project.imageUrl || IMAGES[project.id]} alt={project.title} className="h-full w-full object-cover" />
             <div className="absolute inset-0 rounded-lg bg-gradient-to-t from-black/40 to-transparent" />
           </div>
 
@@ -33,7 +35,7 @@ function ProjectCard({ project }) {
             <p className="mt-2 text-sm text-slate-300">{project.description}</p>
 
             <div className="mt-4 flex flex-wrap gap-2">
-              {project.tech.map((t) => (
+              {(project.technologies || project.tech || []).map((t) => (
                 <span key={t} className="inline-flex items-center gap-2 rounded-full bg-white/5 px-3 py-1 text-xs font-medium text-slate-200">
                   {t}
                 </span>
@@ -42,7 +44,7 @@ function ProjectCard({ project }) {
 
             <div className="mt-4 flex gap-3">
               <a
-                href={project.github}
+                href={project.githubLink}
                 target="_blank"
                 rel="noreferrer"
                 className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-slate-900/70 px-3 py-2 text-sm font-semibold text-white transition shadow-sm hover:scale-105 hover:shadow-[0_10px_30px_rgba(56,189,248,0.12)]"
@@ -50,7 +52,7 @@ function ProjectCard({ project }) {
                 GitHub
               </a>
               <a
-                href={project.demo}
+                href={project.liveLink}
                 target="_blank"
                 rel="noreferrer"
                 className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-gradient-to-r from-cyan-500 to-indigo-500 px-3 py-2 text-sm font-semibold text-slate-950 transition hover:scale-105 hover:brightness-110"

@@ -27,6 +27,9 @@ coverage/
 aws-exports.js
 src/aws-exports.js
 
+# Ignore local images (they're now hosted from S3)
+public/images/
+
 # Amplify local backend
 amplify/#current-cloud-backend
 amplify/.config/local-*

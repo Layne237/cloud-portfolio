@@ -160,6 +160,7 @@ The frontend contact form is already implemented in `src/components/sections/Con
 For backend deployment and AWS Lambda setup, follow the instructions in `AWS_LAMBDA_CONTACT_DEPLOYMENT.md`.
 For admin auth, analytics, and dashboard setup, see `AWS_ADMIN_DASHBOARD_DEPLOYMENT.md`.
 For production monitoring, observability, and CloudWatch alarms, see `AWS_MONITORING_DEPLOYMENT.md`.
+For S3 + CloudFront image hosting setup, see `AWS_S3_CLOUDFRONT_SETUP.md`.
 
 ## What CloudFront Does Automatically
 

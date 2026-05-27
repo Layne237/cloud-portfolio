@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion'
+import { IMAGES } from '../../constants/imageUrls.js'
 
 function About() {
   return (
@@ -21,8 +22,9 @@ function About() {
             transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
           />
           <div className="relative flex h-full flex-col items-center justify-center rounded-[1.4rem] border border-white/5 bg-slate-950/90 p-8 text-center">
-            <div className="mb-6 inline-flex h-36 w-36 items-center justify-center rounded-full border border-cyan-400/20 bg-slate-900/90 text-xl font-semibold text-cyan-300 shadow-[0_0_40px_rgba(56,189,248,0.18)]">
-              Image
+            <div className="mb-6 inline-flex h-36 w-36 items-center justify-center rounded-full border border-cyan-400/20 bg-slate-900/90 text-xl font-semibold text-cyan-300 shadow-[0_0_40px_rgba(56,189,248,0.18)] overflow-hidden">
+              {/* Profile image served from S3 via shared constants */}
+              <img src={IMAGES.PROFILE} alt="Profile" className="h-full w-full object-cover" />
             </div>
             <p className="text-sm uppercase tracking-[0.35em] text-cyan-300/80">Profile</p>
             <h3 className="mt-4 text-2xl font-semibold text-white">Creative Cloud Engineer</h3>

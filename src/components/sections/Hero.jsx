@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion'
 import useWebSocket from '../../hooks/useWebSocket.jsx'
+import { IMAGES } from '../../constants/imageUrls.js'
 
 const containerVariants = {
   hidden: {
@@ -57,6 +58,9 @@ function Hero() {
         >
           SONG MARTIN ARIEL EUDES
         </motion.h1>
+
+        {/* Profile image served from S3 via the shared image constants */}
+        <img src={IMAGES.PROFILE} alt="SONG MARTIN ARIEL EUDES" className="w-48 h-48 rounded-full object-cover shadow-2xl mt-6" />
 
         <motion.p
           className="mt-6 max-w-3xl text-base leading-8 text-slate-300 sm:text-lg"
