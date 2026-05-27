@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion'
+import useWebSocket from '../hooks/useWebSocket.jsx'
 
 const containerVariants = {
   hidden: {
@@ -64,6 +65,8 @@ function Hero() {
           I design cloud-first web applications that blend scalable engineering with polished user experiences. My work is rooted in modern full-stack architecture, responsive interfaces, and secure cloud deployments for brands that want to move fast with confidence.
         </motion.p>
 
+        <HeroPresence />
+
         <motion.div
           className="mt-10 flex flex-col gap-4 sm:flex-row sm:flex-wrap sm:items-center"
           variants={itemVariants}
@@ -106,8 +109,34 @@ function Hero() {
             <span className="relative z-10">Contact Me</span>
           </a>
         </motion.div>
+          </a>
+
+          <a
+            href="#contact"
+            className="group relative inline-flex w-full items-center justify-center overflow-hidden rounded-full border border-white/10 bg-slate-950/80 px-6 py-3 text-sm font-semibold text-white transition sm:w-auto"
+          >
+            <span className="absolute inset-0 bg-gradient-to-r from-cyan-400 via-indigo-500 to-fuchsia-500 opacity-0 transition duration-500 group-hover:opacity-80" />
+            <span className="relative z-10">Contact Me</span>
+          </a>
+        </motion.div>
       </motion.div>
     </section>
+  )
+}
+
+function HeroPresence() {
+  const { enabled, developersOnlineText, status } = useWebSocket()
+
+  if (!enabled) {
+    return null
+  }
+
+  return (
+    <div className="mt-6 rounded-3xl border border-cyan-500/20 bg-cyan-500/10 p-4 text-sm text-slate-100 sm:mt-8">
+      <p className="font-semibold text-cyan-200">Live presence</p>
+      <p className="mt-2 text-base text-white">{developersOnlineText}</p>
+      <p className="mt-1 text-xs text-slate-400">Connection status: {status}</p>
+    </div>
   )
 }
 

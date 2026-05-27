@@ -28,6 +28,12 @@ function Navbar() {
               {link}
             </a>
           ))}
+          <a
+            href="/admin/login"
+            className="rounded-full border border-cyan-500 px-4 py-2 text-sm font-semibold text-cyan-300 transition hover:border-cyan-400 hover:text-white"
+          >
+            Admin
+          </a>
         </nav>
 
         <button

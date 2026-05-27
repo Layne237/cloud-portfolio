@@ -1,0 +1,84 @@
+name: Backend Lambda Deploy
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Deployment environment'
+        required: false
+        default: staging
+        type: choice
+        options:
+          - development
+          - staging
+          - production
+
+jobs:
+  package-and-deploy:
+    name: Package and Deploy Lambda
+    runs-on: ubuntu-latest
+    environment: ${{ github.event.inputs.environment || 'staging' }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install Lambda dependencies
+        run: |
+          cd lambda
+          npm install
+
+      - name: Package Lambda functions
+        run: |
+          mkdir -p backend-package
+          cd lambda
+          for file in *.js; do
+            name=$(basename "$file" .js)
+            zip -r ../backend-package/${name}.zip "$file" node_modules package.json
+          done
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v3
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      - name: Deploy Lambda functions
+        run: |
+          declare -A mapping=(
+            [contact]=CONTACT_FUNCTION_NAME
+            [visitorCounter]=VISITOR_FUNCTION_NAME
+            [getContactSubmissions]=GET_SUBMISSIONS_FUNCTION_NAME
+            [getVisitorAnalytics]=GET_ANALYTICS_FUNCTION_NAME
+            [projects]=PROJECTS_FUNCTION_NAME
+          [reportFrontendMetrics]=METRICS_FUNCTION_NAME
+            if [[ -n "$function_name" ]]; then
+              echo "Updating Lambda function: $function_name"
+              aws lambda update-function-code \
+                --function-name "$function_name" \
+                --zip-file "fileb://backend-package/$file.zip"
+            else
+              echo "Skipping $file because $secret_name is not set."
+            fi
+          done
+
+      - name: Invalidate CloudFront cache
+        if: ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID != '' }}
+        run: |
+          aws cloudfront create-invalidation \
+            --distribution-id ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }} \
+            --paths "/*"
+    env:
+      CONTACT_FUNCTION_NAME: ${{ secrets.CONTACT_FUNCTION_NAME }}
+      VISITOR_FUNCTION_NAME: ${{ secrets.VISITOR_FUNCTION_NAME }}
+      GET_SUBMISSIONS_FUNCTION_NAME: ${{ secrets.GET_SUBMISSIONS_FUNCTION_NAME }}
+      GET_ANALYTICS_FUNCTION_NAME: ${{ secrets.GET_ANALYTICS_FUNCTION_NAME }}
+      PROJECTS_FUNCTION_NAME: ${{ secrets.PROJECTS_FUNCTION_NAME }}
+      METRICS_FUNCTION_NAME: ${{ secrets.METRICS_FUNCTION_NAME }}

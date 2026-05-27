@@ -5,8 +5,8 @@ const projectsData = [
     description:
       'A collaborative todo application with real-time sync, user authentication, and cloud-backed storage for teams and personal use.',
     tech: ['React', 'TailwindCSS', 'Node.js', 'Supabase'],
-    github: 'https://github.com/Layne237/agt-todo',
-    demo: 'https://example.com/agt-todo',
+    github: '#',
+    demo: '#',
     image: 'https://picsum.photos/800/600?random=101',
   },
   {
@@ -15,8 +15,8 @@ const projectsData = [
     description:
       'A banking simulation platform with secure transactions, account management, and an admin dashboard for analytics.',
     tech: ['React', 'Node.js', 'Express.js', 'PostgreSQL', 'Docker'],
-    github: 'https://github.com/Layne237/fin-bank-pro',
-    demo: 'https://example.com/fin-bank-pro',
+    github: '#',
+    demo: '#',
     image: 'https://picsum.photos/800/600?random=102',
   },
   {
@@ -25,8 +25,8 @@ const projectsData = [
     description:
       'A platform connecting homeowners with vetted service providers, featuring booking flows, reviews, and payment integration.',
     tech: ['React', 'TailwindCSS', 'GraphQL', 'AWS'],
-    github: 'https://github.com/Layne237/home-service-platform',
-    demo: 'https://example.com/home-service',
+    github: '#',
+    demo: '#',
     image: 'https://picsum.photos/800/600?random=103',
   },
   {
@@ -35,8 +35,8 @@ const projectsData = [
     description:
       'An event management tool for schools to publish schedules, ticketing, and volunteer coordination with role-based access.',
     tech: ['React', 'Firebase', 'TailwindCSS'],
-    github: 'https://github.com/Layne237/school-event-dispenser',
-    demo: 'https://example.com/school-event',
+    github: '#',
+    demo: '#',
     image: 'https://picsum.photos/800/600?random=104',
   },
   {
@@ -45,8 +45,8 @@ const projectsData = [
     description:
       'A rhythm-based snake game that syncs movement to audio beats, built for fun and performance on web platforms.',
     tech: ['HTML', 'CSS', 'JavaScript', 'Canvas'],
-    github: 'https://github.com/Layne237/snake-beat-game',
-    demo: 'https://example.com/snake-beat',
+    github: '#',
+    demo: '#',
     image: 'https://picsum.photos/800/600?random=105',
   },
   {
@@ -55,8 +55,8 @@ const projectsData = [
     description:
       'A lightweight student information system for managing records, grades, and schedules with import/export utilities.',
     tech: ['PHP', 'MySQL', 'Bootstrap'],
-    github: 'https://github.com/Layne237/studentmanager',
-    demo: 'https://example.com/studentmanager',
+    github: '#',
+    demo: '#',
     image: 'https://picsum.photos/800/600?random=106',
   },
 ]

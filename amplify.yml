@@ -3,27 +3,21 @@ frontend:
   phases:
     preBuild:
       commands:
-        # Install dependencies exactly from package-lock.json for reproducible builds
         - npm ci
+        - npm run test  # Optional: run tests before build
+        - npm run lint  # Optional: run linting
     build:
       commands:
-        # Run the Vite production build command defined in package.json
         - npm run build
   artifacts:
-    # Amplify deploys the files from this directory after the build completes
     baseDirectory: dist
     files:
-      - '**/*'
+      - "**/*"
   cache:
-    # Cache node_modules between builds to speed up future deploys
     paths:
       - node_modules/**/*
 
-# LEARNING COMMENTS:
-# - Amplify reads amplify.yml from the project root and uses it to drive the CI/CD build pipeline.
-# - The preBuild phase installs dependencies, and the build phase runs your production build.
-# - baseDirectory must match Vite's outDir because Amplify deploys whatever folder contains the compiled static app.
-# - The dist folder is the production output from Vite; build is the lifecycle step that creates dist.
-# - Vite generates a dist directory, whereas CRA uses a build folder by convention.
-# - This YAML file tells Amplify exactly how to build and package the app, so Amplify does not rely on its own framework autodetection.
-# - To use Node.js 18, ensure the Amplify build image/runtime is configured for Node 18 in the Amplify console or custom build image settings.
+# Notes:
+# - `npm run test` and `npm run lint` are optional; remove them if not used in CI.
+# - Ensure `package.json` defines `test` and `lint` scripts (or Amplify will fail the build when they run).
+# - To set Node version in Amplify, configure the build image or add an `.nvmrc`/`engines` field in package.json.
