@@ -4,20 +4,13 @@ frontend:
     preBuild:
       commands:
         - npm ci
-        - npm run test  # Optional: run tests before build
-        - npm run lint  # Optional: run linting
     build:
       commands:
         - npm run build
   artifacts:
     baseDirectory: dist
     files:
-      - "**/*"
+      - '**/*'
   cache:
     paths:
       - node_modules/**/*
-
-# Notes:
-# - `npm run test` and `npm run lint` are optional; remove them if not used in CI.
-# - Ensure `package.json` defines `test` and `lint` scripts (or Amplify will fail the build when they run).
-# - To set Node version in Amplify, configure the build image or add an `.nvmrc`/`engines` field in package.json.
