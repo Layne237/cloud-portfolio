@@ -1,21 +1,26 @@
-import useVisitorCounter from '../../hooks/useVisitorCounter.js'
+import { FaGithub, FaLinkedin, FaEnvelope } from 'react-icons/fa'
 
-function Footer() {
-  const { count, loading, error } = useVisitorCounter()
+export default function Footer() {
+  const currentYear = new Date().getFullYear()
 
   return (
-    <footer className="border-t border-slate-800 bg-slate-950/95 text-slate-500">
-      <div className="mx-auto flex max-w-6xl flex-col gap-3 px-6 py-6 text-center sm:px-8 sm:flex-row sm:items-center sm:justify-between">
-        <div className="space-y-1">
-          <p>Built with React, Vite, TailwindCSS, and Framer Motion.</p>
-          <p className="text-sm text-slate-400">© {new Date().getFullYear()} Cloud Portfolio</p>
+    <footer className="border-t border-white/10 py-8 mt-20">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+          <p className="text-slate-400 text-sm">© {currentYear} Song Martin Ariel Eudes. All rights reserved.</p>
+          <div className="flex space-x-6">
+            <a href="https://github.com/Layne237" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-cyan-400 transition-colors">
+              <FaGithub size={20} />
+            </a>
+            <a href="#" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-cyan-400 transition-colors">
+              <FaLinkedin size={20} />
+            </a>
+            <a href="mailto:hello@example.com" className="text-slate-400 hover:text-cyan-400 transition-colors">
+              <FaEnvelope size={20} />
+            </a>
+          </div>
         </div>
-        <p className={`text-sm ${error ? 'text-rose-400' : 'text-slate-400'}`}>
-          {loading ? 'Loading visitor count…' : error ? 'Visitor count unavailable.' : `${count ?? 0} visitors have viewed this portfolio`}
-        </p>
       </div>
     </footer>
   )
 }
-
-export default Footer

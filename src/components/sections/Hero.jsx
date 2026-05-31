@@ -1,137 +1,66 @@
 import { motion } from 'framer-motion'
-import useWebSocket from '../../hooks/useWebSocket.jsx'
-import { IMAGES } from '../../constants/imageUrls.js'
+import { FaGithub } from 'react-icons/fa'
 
-const containerVariants = {
-  hidden: {
-    opacity: 0,
-    y: 40,
-  },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.9,
-      ease: 'easeOut',
-      staggerChildren: 0.15,
-    },
-  },
+const fadeUp = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
 }
 
-const itemVariants = {
-  hidden: {
-    opacity: 0,
-    y: 24,
-  },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.6,
-      ease: 'easeOut',
-    },
-  },
+const stagger = {
+  visible: { transition: { staggerChildren: 0.2 } },
 }
 
-function Hero() {
-  return (
-    <section id="home" className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-gray-900/70 p-6 shadow-2xl shadow-cyan-500/20 backdrop-blur-xl sm:p-10">
-      {/* Glassmorphism uses a translucent background + backdrop-blur to create a frosted panel effect */}
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(56,189,248,0.18),_transparent_25%),radial-gradient(circle_at_bottom_right,_rgba(168,85,247,0.18),_transparent_20%)]" />
-      <motion.div
-        className="relative rounded-[1.75rem] border border-white/10 bg-white/10 p-6 shadow-[0_0_120px_rgba(15,23,42,0.35)] backdrop-blur-2xl sm:p-10"
-        variants={containerVariants}
-        initial="hidden"
-        animate="visible"
-      >
-        {/* Variants group related animation states to keep motion logic reusable and easier to maintain. */}
-        <motion.p
-          className="mb-4 text-sm uppercase tracking-[0.35em] text-cyan-300/90"
-          variants={itemVariants}
-        >
-          Full-Stack Developer | CS Engineering Student | Cloud Engineer
-        </motion.p>
-
-        <motion.h1
-          className="text-4xl font-semibold text-white sm:text-5xl lg:text-6xl"
-          variants={itemVariants}
-        >
-          SONG MARTIN ARIEL EUDES
-        </motion.h1>
-
-        {/* Profile image served from S3 via the shared image constants */}
-        <img src={IMAGES.PROFILE} alt="SONG MARTIN ARIEL EUDES" className="w-48 h-48 rounded-full object-cover shadow-2xl mt-6" />
-
-        <motion.p
-          className="mt-6 max-w-3xl text-base leading-8 text-slate-300 sm:text-lg"
-          variants={itemVariants}
-        >
-          I design cloud-first web applications that blend scalable engineering with polished user experiences. My work is rooted in modern full-stack architecture, responsive interfaces, and secure cloud deployments for brands that want to move fast with confidence.
-        </motion.p>
-
-        <HeroPresence />
-
-        <motion.div
-          className="mt-10 flex flex-col gap-4 sm:flex-row sm:flex-wrap sm:items-center"
-          variants={itemVariants}
-        >
-          <a
-            href="#projects"
-            className="group relative inline-flex w-full items-center justify-center overflow-hidden rounded-full px-6 py-3 text-sm font-semibold text-white transition sm:w-auto"
-          >
-            <span className="absolute inset-0 bg-gradient-to-r from-cyan-400 via-indigo-500 to-fuchsia-500 opacity-70 blur-sm transition duration-500 group-hover:opacity-100" />
-            <span className="relative z-10 rounded-full bg-slate-950/90 px-6 py-3 transition duration-300 group-hover:bg-slate-900/95">
-              View Projects
-            </span>
-          </a>
-
-          <a
-            href="https://github.com/"
-            target="_blank"
-            rel="noreferrer"
-            className="group relative inline-flex w-full items-center justify-center overflow-hidden rounded-full border border-white/10 bg-slate-950/80 px-6 py-3 text-sm font-semibold text-white transition sm:w-auto"
-          >
-            <span className="absolute inset-0 bg-gradient-to-r from-cyan-400 via-indigo-500 to-fuchsia-500 opacity-0 transition duration-500 group-hover:opacity-80" />
-            <span className="relative z-10">GitHub</span>
-          </a>
-
-          <a
-            href="https://www.linkedin.com/"
-            target="_blank"
-            rel="noreferrer"
-            className="group relative inline-flex w-full items-center justify-center overflow-hidden rounded-full border border-white/10 bg-slate-950/80 px-6 py-3 text-sm font-semibold text-white transition sm:w-auto"
-          >
-            <span className="absolute inset-0 bg-gradient-to-r from-cyan-400 via-indigo-500 to-fuchsia-500 opacity-0 transition duration-500 group-hover:opacity-80" />
-            <span className="relative z-10">LinkedIn</span>
-          </a>
-
-          <a
-            href="#contact"
-            className="group relative inline-flex w-full items-center justify-center overflow-hidden rounded-full border border-white/10 bg-slate-950/80 px-6 py-3 text-sm font-semibold text-white transition sm:w-auto"
-          >
-            <span className="absolute inset-0 bg-gradient-to-r from-cyan-400 via-indigo-500 to-fuchsia-500 opacity-0 transition duration-500 group-hover:opacity-80" />
-            <span className="relative z-10">Contact Me</span>
-          </a>
-        </motion.div>
-      </motion.div>
-    </section>
-  )
-}
-
-function HeroPresence() {
-  const { enabled, developersOnlineText, status } = useWebSocket()
-
-  if (!enabled) {
-    return null
+export default function Hero() {
+  const scrollTo = (id) => {
+    const element = document.getElementById(id)
+    if (element) element.scrollIntoView({ behavior: 'smooth' })
   }
 
   return (
-    <div className="mt-6 rounded-3xl border border-cyan-500/20 bg-cyan-500/10 p-4 text-sm text-slate-100 sm:mt-8">
-      <p className="font-semibold text-cyan-200">Live presence</p>
-      <p className="mt-2 text-base text-white">{developersOnlineText}</p>
-      <p className="mt-1 text-xs text-slate-400">Connection status: {status}</p>
-    </div>
+    <section id="home" className="min-h-screen flex items-center justify-center pt-16 pb-20 px-4">
+      <div className="max-w-6xl mx-auto text-center">
+        <motion.div variants={stagger} initial="hidden" animate="visible">
+          <motion.div variants={fadeUp} className="inline-block mb-4 px-4 py-1 rounded-full glass text-sm text-cyan-400">
+            ✨ Welcome to my digital space
+          </motion.div>
+
+          <motion.h1 variants={fadeUp} className="text-5xl md:text-7xl font-bold mb-6">
+            <span className="text-gradient">SONG MARTIN<br />ARIEL EUDES</span>
+          </motion.h1>
+
+          <motion.p variants={fadeUp} className="text-xl md:text-2xl text-slate-300 mb-4">
+            Full-Stack Developer | CS Engineering Student | Cloud Engineer
+          </motion.p>
+
+          <motion.p variants={fadeUp} className="text-slate-400 max-w-2xl mx-auto mb-8">
+            I design cloud-first web applications that blend scalable engineering with polished user experiences. 
+            My work is rooted in modern full-stack architecture, responsive interfaces, and secure deployments.
+          </motion.p>
+
+          <motion.div variants={fadeUp} className="flex flex-wrap justify-center gap-4">
+            <button
+              onClick={() => scrollTo('projects')}
+              className="px-6 py-3 rounded-full bg-gradient-to-r from-cyan-500 to-indigo-500 text-white font-semibold hover:scale-105 transition-transform duration-300"
+            >
+              View Projects
+            </button>
+            <a
+              href="https://github.com/Layne237"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-6 py-3 rounded-full glass text-white font-semibold hover:scale-105 transition-transform duration-300 flex items-center gap-2"
+            >
+              <FaGithub /> GitHub
+            </a>
+            <button
+              onClick={() => scrollTo('contact')}
+              className="px-6 py-3 rounded-full border border-cyan-500 text-cyan-400 font-semibold hover:bg-cyan-500/10 transition-all duration-300"
+            >
+              Contact Me
+            </button>
+          </motion.div>
+        </motion.div>
+      </div>
+    </section>
   )
 }
-
-export default Hero

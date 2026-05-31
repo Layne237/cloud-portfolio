@@ -1,16 +1,12 @@
-import Navbar from './Navbar.jsx'
-import Footer from './Footer.jsx'
+import Navbar from './Navbar'
+import Footer from './Footer'
 
-function Layout({ children }) {
+export default function Layout({ children }) {
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100">
+    <div className="min-h-screen bg-slate-950">
       <Navbar />
-      <main className="mx-auto max-w-6xl px-6 py-8 sm:px-8 lg:px-10">
-        {children}
-      </main>
+      <main>{children}</main>
       <Footer />
     </div>
   )
 }
-
-export default Layout

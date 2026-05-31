@@ -1,46 +1,6 @@
-# Logs
-logs
-*.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-pnpm-debug.log*
-lerna-debug.log*
-
-# Dependency folders
 node_modules/
-
-# Build output
 dist/
-dist-ssr/
-coverage/
-
-# Local caches
-.npm
-*.local
-
-# Environment variables and secrets
+.DS_Store
+*.log
 .env
 .env.local
-.env.production
-.env.*
-aws-exports.js
-src/aws-exports.js
-
-# Ignore local images (they're now hosted from S3)
-public/images/
-
-# Amplify local backend
-amplify/#current-cloud-backend
-amplify/.config/local-*
-
-# Editor directories and files
-.vscode/*
-!.vscode/extensions.json
-.idea
-.DS_Store
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw?

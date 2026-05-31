@@ -1,16 +1,22 @@
-const experienceData = [
+export default [
   {
-    company: 'CloudNine Agency',
-    role: 'Frontend Engineer',
-    period: '2024 – Present',
-    description: 'Led the frontend development for marketing websites and dashboards using React, TailwindCSS, and micro-interactions for product launches.',
+    title: 'Computer Science Engineering Student',
+    period: '2022 – Present',
+    description: 'Pursuing degree with focus on software engineering, cloud computing, and scalable systems. Coursework includes data structures, algorithms, web development, and database design.',
   },
   {
-    company: 'Stratus Labs',
-    role: 'UI Developer',
-    period: '2022 – 2024',
-    description: 'Built accessible design systems and reusable components for B2B web applications with responsive layout and motion behavior.',
+    title: 'Full-Stack Developer (Projects)',
+    period: '2023 – Present',
+    description: 'Built multiple full-stack applications using React, Node.js, PHP, and MySQL. Implemented authentication, real-time features, and responsive UIs.',
+  },
+  {
+    title: 'Cloud Engineering Learner',
+    period: '2024 – Present',
+    description: 'Actively learning AWS services: Amplify, Lambda, API Gateway, DynamoDB, Cognito, and CloudFront. Building cloud-native portfolios and serverless applications.',
+  },
+  {
+    title: 'Hackathons & Collaborative Projects',
+    period: '2023 – Present',
+    description: 'Participated in university hackathons and collaborative coding events, focusing on rapid prototyping and team-based development.',
   },
 ]
-
-export default experienceData

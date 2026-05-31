@@ -1,20 +1,7 @@
-import { useEffect, useState } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import Home from './pages/Home.jsx'
-import Loading from './components/ui/Loading.jsx'
+import Home from './pages/Home'
 
 function App() {
-  const [loading, setLoading] = useState(true)
-
-  useEffect(() => {
-    const timer = setTimeout(() => setLoading(false), 800)
-    return () => clearTimeout(timer)
-  }, [])
-
-  if (loading) {
-    return <Loading />
-  }
-
   return (
     <BrowserRouter>
       <Routes>

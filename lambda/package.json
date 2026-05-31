@@ -1,7 +1,0 @@
-{
-  "name": "cloud-portfolio-lambda",
-  "private": true,
-  "dependencies": {
-    "aws-xray-sdk-core": "^3.4.0"
-  }
-}

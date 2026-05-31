@@ -1,24 +1,16 @@
-import { useMemo } from 'react'
 import { motion } from 'framer-motion'
-import { useScrollAnimation } from '../../hooks/useScrollAnimation.js'
 
-function AnimatedSection({ id, children }) {
-  const { ref, visible } = useScrollAnimation({ threshold: 0.15 })
-
-  const animationProps = useMemo(
-    () => ({
-      initial: { opacity: 0, y: 30 },
-      animate: visible ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 },
-      transition: { duration: 0.7, ease: 'easeOut' },
-    }),
-    [visible],
-  )
-
+export default function AnimatedSection({ id, children }) {
   return (
-    <motion.section id={id} ref={ref} {...animationProps} className="mb-10">
-      {children}
-    </motion.section>
+    <section id={id} className="py-20">
+      <motion.div
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        viewport={{ once: true, margin: '-100px' }}
+      >
+        {children}
+      </motion.div>
+    </section>
   )
 }
-
-export default AnimatedSection

@@ -1,51 +1,75 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
+import { FaBars, FaTimes } from 'react-icons/fa'
 
-const navLinks = ['Home', 'About', 'Tech Stack', 'Projects', 'Experience', 'Contact']
+const navLinks = ['Home', 'About', 'Tech', 'Projects', 'Experience', 'Contact']
 
-function Navbar() {
-  const [menuOpen] = useState(false)
+export default function Navbar() {
+  const [isOpen, setIsOpen] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
+
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 20)
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
+  const scrollTo = (id) => {
+    setIsOpen(false)
+    const element = document.getElementById(id.toLowerCase())
+    if (element) element.scrollIntoView({ behavior: 'smooth' })
+  }
 
   return (
-    <motion.header
-      className="sticky top-0 z-40 border-b border-slate-800 bg-slate-950/95 backdrop-blur"
-      initial={{ y: -30, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.5, ease: 'easeOut' }}
-    >
-      <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4 sm:px-8 lg:px-10">
-        <a href="#home" className="text-xl font-semibold tracking-tight text-cyan-300">
-          Cloud Portfolio
-        </a>
-
-        <nav className="hidden items-center gap-6 md:flex">
-          {navLinks.map((link) => (
-            <a
-              key={link}
-              href={`#${link.toLowerCase().replace(/\s+/g, '-')}`}
-              className="text-sm font-medium text-slate-300 transition hover:text-white"
-            >
-              {link}
-            </a>
-          ))}
-          <a
-            href="/admin/login"
-            className="rounded-full border border-cyan-500 px-4 py-2 text-sm font-semibold text-cyan-300 transition hover:border-cyan-400 hover:text-white"
+    <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${scrolled ? 'glass shadow-lg' : 'bg-transparent'}`}>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between items-center h-16">
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            className="text-xl font-bold text-gradient cursor-pointer"
+            onClick={() => scrollTo('home')}
           >
-            Admin
-          </a>
-        </nav>
+            SONG MARTIN
+          </motion.div>
 
-        <button
-          type="button"
-          className="inline-flex items-center rounded-full border border-slate-700 bg-slate-900 px-4 py-2 text-sm text-slate-200 transition hover:border-cyan-400 hover:text-cyan-200 md:hidden"
-          aria-label="Toggle menu"
-        >
-          {menuOpen ? 'Close' : 'Menu'}
-        </button>
+          <div className="hidden md:flex space-x-8">
+            {navLinks.map((link) => (
+              <button
+                key={link}
+                onClick={() => scrollTo(link)}
+                className="text-slate-300 hover:text-cyan-400 transition-colors duration-300"
+              >
+                {link}
+              </button>
+            ))}
+          </div>
+
+          <button className="md:hidden text-white" onClick={() => setIsOpen(!isOpen)}>
+            {isOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
+          </button>
+        </div>
       </div>
-    </motion.header>
+
+      {isOpen && (
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="md:hidden glass"
+        >
+          <div className="px-4 py-3 space-y-2">
+            {navLinks.map((link) => (
+              <button
+                key={link}
+                onClick={() => scrollTo(link)}
+                className="block w-full text-left text-slate-300 hover:text-cyan-400 py-2"
+              >
+                {link}
+              </button>
+            ))}
+          </div>
+        </motion.div>
+      )}
+    </nav>
   )
 }
-
-export default Navbar

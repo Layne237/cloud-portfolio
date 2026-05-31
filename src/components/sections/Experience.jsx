@@ -1,26 +1,21 @@
-import AnimatedSection from '../ui/AnimatedSection.jsx'
-import experienceData from '../../data/experienceData.js'
+import AnimatedSection from '../ui/AnimatedSection'
+import experienceData from '../../data/experienceData'
 
-function Experience() {
+export default function Experience() {
   return (
     <AnimatedSection id="experience">
-      <div className="rounded-3xl border border-slate-800 bg-slate-950/80 p-10 shadow-[0_0_40px_rgba(15,23,42,0.6)]">
-        <h2 className="text-3xl font-semibold text-white">Experience</h2>
-        <p className="mt-3 max-w-2xl leading-8 text-slate-300">
-          A snapshot of the teams, roles, and products that shaped my practice.
-        </p>
-
-        <div className="mt-8 space-y-5">
-          {experienceData.map((experience) => (
-            <div key={experience.company} className="space-y-1 rounded-2xl bg-slate-900/90 p-5">
-              <div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between">
-                <div>
-                  <h3 className="text-xl font-semibold text-white">{experience.role}</h3>
-                  <p className="text-sm text-slate-400">{experience.company}</p>
-                </div>
-                <p className="text-sm text-cyan-300">{experience.period}</p>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
+          <span className="text-gradient">Engineering Journey</span>
+        </h2>
+        <div className="space-y-8">
+          {experienceData.map((exp, idx) => (
+            <div key={idx} className="glass p-6 rounded-2xl">
+              <div className="flex flex-col md:flex-row md:justify-between md:items-center mb-4">
+                <h3 className="text-xl font-semibold text-cyan-400">{exp.title}</h3>
+                <span className="text-slate-400 text-sm">{exp.period}</span>
               </div>
-              <p className="text-slate-300">{experience.description}</p>
+              <p className="text-slate-300">{exp.description}</p>
             </div>
           ))}
         </div>
@@ -28,5 +23,3 @@ function Experience() {
     </AnimatedSection>
   )
 }
-
-export default Experience
